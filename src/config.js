@@ -1,1 +1,1 @@
-export const API = "https://regal-carry-api.onrender.com"
+export const API = ""
