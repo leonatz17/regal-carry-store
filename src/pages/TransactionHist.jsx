@@ -1,3 +1,5 @@
+import { API } from "../config"
+
 export default function TransactionHistory({ orders }) {
   return (
     <section className="bg-[#0A2947] min-h-screen py-16 px-6">
@@ -9,7 +11,7 @@ export default function TransactionHistory({ orders }) {
           <button
             className="bg-red-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-red-700"
             onClick={async () => {
-              await fetch("/api/orders", { method: "DELETE" })
+              await fetch(`${API}/api/orders`, { method: "DELETE" })
               window.location.reload()
             }}>Clear History</button>
         </div>

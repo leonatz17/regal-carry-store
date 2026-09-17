@@ -1,5 +1,6 @@
 
 import { useState } from "react"
+import { API } from "../config"
 
 export default function Checkout({ cart, onClose, onSuccess }) {
   const [form, setForm] = useState({ customer_name: "", email: "", address: "", city: "", state: "", zip: "" })
@@ -14,7 +15,7 @@ export default function Checkout({ cart, onClose, onSuccess }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const res = await fetch("/api/orders", {
+    const res = await fetch(`${API}/api/orders`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...form, items: cart.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty, image: i.image })), total }),

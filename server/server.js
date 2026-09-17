@@ -60,4 +60,5 @@ app.post("/api/products", (req, res) => {
   res.status(201).json({ id: r.lastInsertRowid })
 })
 
-app.listen(3001, () => console.log("API on http://localhost:3001"))
+const port = process.env.PORT || 3001
+app.listen(port, () => console.log("API on port " + port))

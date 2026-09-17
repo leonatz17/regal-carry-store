@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { API } from "./config"
 import Navbar from "./components/Navbar"
 import Home from "./pages/Homepage"
 import Cart from "./pages/Cart"
@@ -49,7 +50,7 @@ export default function App() {
         setActivePages={setActivePages}
         cartCount={cart.reduce((n, i) => n + i.qty, 0)}
         onOpenCart={() => setActivePages("cart")}
-        onOpenOrders={() => { fetch("/api/orders").then(r => r.json()).then(setOrders); setActivePages("orders") }}
+        onOpenOrders={() => { fetch(`${API}/api/orders`).then(r => r.json()).then(setOrders); setActivePages("orders") }}
       />
       <main>
         {activePages === "home" && <Home onAddToCart={requestAdd} />}

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import BagLogo from '../images/bags.png'
+import { API } from "../config"
 
 export default function Home({ onAddToCart }) {
   const [categories, setCategories] = useState([])
@@ -8,8 +9,8 @@ export default function Home({ onAddToCart }) {
   const productsRef = useRef(null)
 
   useEffect(() => {
-    fetch("/api/categories").then(r => r.json()).then(setCategories).catch(() => {})
-    fetch("/api/products").then(r => r.json()).then(setProducts).catch(() => {})
+    fetch(`${API}/api/categories`).then(r => r.json()).then(setCategories).catch(() => {})
+    fetch(`${API}/api/products`).then(r => r.json()).then(setProducts).catch(() => {})
   }, [])
 
   const shown = active === "All"

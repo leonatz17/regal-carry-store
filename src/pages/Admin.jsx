@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { API } from "../config"
 
 export default function Admin() {
   const [categories, setCategories] = useState([])
@@ -7,23 +8,23 @@ export default function Admin() {
   const [msg, setMsg] = useState("")
 
   useEffect(() => {
-    fetch("/api/categories").then(r => r.json()).then(setCategories).catch(() => {})
+    fetch(`${API}/api/categories`).then(r => r.json()).then(setCategories).catch(() => {})
   }, [])
 
   async function addCategory(e) {
     e.preventDefault()
-    const r = await fetch("/api/categories", {
+    const r = await fetch(`${API}/api/categories`, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: cat }),
     })
     setMsg(r.ok ? `Category "${cat}" added` : "Error adding category")
     setCat("")
-    fetch("/api/categories").then(r => r.json()).then(setCategories)
+    fetch(`${API}/api/categories`).then(r => r.json()).then(setCategories)
   }
 
   async function addProduct(e) {
     e.preventDefault()
-    const r = await fetch("/api/products", {
+    const r = await fetch(`${API}/api/products`, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...p, price: Number(p.price), category_id: p.category_id ? Number(p.category_id) : null }),
     })
